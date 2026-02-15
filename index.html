@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>RAIYAN PRO MAX</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --core-bg: rgba(10, 10, 15, 0.98);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden; background: #000;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .game-container { position: absolute; inset: 0; z-index: 1; }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* RGB Border Animation Logic */
+        @keyframes rainbow-border {
+            0% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+            20% { border-color: #00f3ff; box-shadow: 0 0 15px #00f3ff; }
+            40% { border-color: #ffff00; box-shadow: 0 0 15px #ffff00; }
+            60% { border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
+            80% { border-color: #ff00ff; box-shadow: 0 0 15px #ff00ff; }
+            100% { border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+        }
+
+        /* Main Panel UI */
+        .cyber-orb {
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            width: 170px;
+            height: 250px;
+            z-index: 9999;
+            touch-action: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orb-core {
+            width: 100%;
+            height: 100%;
+            background: var(--core-bg);
+            border: 3px solid #ff0000;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            padding: 15px 10px;
+            box-sizing: border-box;
+            backdrop-filter: blur(12px);
+            animation: rainbow-border 5s linear infinite;
+        }
+
+        .orb-header {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 10px #fff;
+            text-align: center;
+        }
+
+        #orb-clock {
+            font-size: 10px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        /* Long Prediction Box */
+        .result-container {
+            width: 95%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .res-val {
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glowText 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowText {
+            from { opacity: 0.6; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1.1); }
+        }
+
+        .timer-box {
+            font-size: 11px;
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+
+        /* Input & Buttons */
+        .orb-input {
+            width: 85%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #fff;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .orb-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 25px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* Footer & Actions */
+        .tg-orb {
+            font-size: 10px;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #0088cc, #00c6ff);
+            padding: 6px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px #000;
+        }
+
+        .orb-actions {
+            display: flex;
+            gap: 20px;
+            font-size: 9px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .action-icon:hover { color: #fff; cursor: pointer; }
+
+        /* Mini Trigger */
+        #mini-orb {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            width: 45px;
+            height: 45px;
+            background: #000;
+            border: 2px solid #fff;
+            border-radius: 0 15px 15px 0;
+            display: none;
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            animation: rainbow-border 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <iframe src="https://tkclub2.com/#/register?invitationCode=23642212049"></iframe>
+    </div>
+
+    <div class="cyber-orb" id="dragOrb">
+        <div class="orb-core">
+            <div class="orb-header">RAIYAN PRO MAX</div>
+            <div id="orb-clock">00:00:00</div>
+
+            <div id="orb-login" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                <input type="text" id="key" class="orb-input" placeholder="PASSKEY">
+                <button class="orb-btn" onclick="unlockOrb()">UNLOCK</button>
+            </div>
+
+            <div id="main-display" style="display: none; width: 100%; flex-direction: column; align-items: center;">
+                <div class="result-container">
+                    <div class="res-val" id="orb-res">LOADING</div>
+                    <div class="timer-box">TIME: <span id="orb-timer">30</span>S</div>
+                </div>
+                
+                <div style="margin-top: 15px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                    <a href="https://t.me/+GwRKDcBHHnozODll" target="_blank" class="tg-orb">JOIN TELEGRAM</a>
+                    <div class="orb-actions">
+                        <span class="action-icon" onclick="minimizeOrb()">HIDE</span>
+                        <span class="action-icon" onclick="location.reload()" style="color: #ff4444;">EXIT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mini-orb" onclick="maximizeOrb()">
+        <div style="width:12px; height:12px; background:#fff; border-radius:2px; animation: pulse 1s infinite alternate;"></div>
+    </div>
+
+    <script>
+        const PASS_KEY = "RAIYANBOSS"; 
+        const orb = document.getElementById("dragOrb");
+
+        function unlockOrb() {
+            const input = document.getElementById("key").value;
+            if(input === PASS_KEY) {
+                document.getElementById("orb-login").style.display = "none";
+                document.getElementById("main-display").style.display = "flex";
+                startEngine();
+            } else {
+                alert("WRONG PASSKEY! TRY AGAIN.");
+            }
+        }
+
+        // Draggable Logic
+        let isDragging = false, offset = {x:0, y:0};
+        orb.addEventListener('touchstart', (e) => {
+            if(e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON' || e.target.tagName === 'A') return;
+            isDragging = true;
+            offset.x = e.touches[0].clientX - orb.offsetLeft;
+            offset.y = e.touches[0].clientY - orb.offsetTop;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if(!isDragging) return;
+            orb.style.left = (e.touches[0].clientX - offset.x) + "px";
+            orb.style.top = (e.touches[0].clientY - offset.y) + "px";
+        });
+
+        document.addEventListener('touchend', () => isDragging = false);
+
+        window.minimizeOrb = () => { orb.style.display = "none"; document.getElementById("mini-orb").style.display = "flex"; };
+        window.maximizeOrb = () => { orb.style.display = "flex"; document.getElementById("mini-orb").style.display = "none"; };
+
+        function startEngine() {
+            const data = ["BIG 7,9", "SMALL 0,2", "SMALL 1,3", "BIG 6,8", "BIG 5", "SMALL 4"];
+            
+            function update() {
+                const now = new Date();
+                const ms = now.getTime();
+                const periodIndex = Math.floor(ms / 30000);
+                const seed = periodIndex * 123;
+                const idx = Math.floor(Math.abs(Math.sin(seed) * data.length)) % data.length;
+                
+                const result = data[idx];
+                const resEl = document.getElementById("orb-res");
+                
+                resEl.innerText = result;
+                // Result Color Logic
+                resEl.style.color = result.includes("BIG") ? "#00f3ff" : "#ff00ff";
+                resEl.style.textShadow = `0 0 20px ${resEl.style.color}`;
+
+                const timer = 30 - (Math.floor(ms / 1000) % 30);
+                document.getElementById("orb-timer").innerText = timer;
+                document.getElementById("orb-clock").innerText = now.toLocaleTimeString();
+            }
+            setInterval(update, 1000);
+            update();
+        }
+    </script>
+</body>
+</html>
